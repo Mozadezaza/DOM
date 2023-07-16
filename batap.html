@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" name="form1" id="form1" method="post">
+        <input type="text" name="email" id="email" size="40">
+        <input type="button" value="Check" name="check" onclick="checkEmail();">
+    </form>
+    <hr>
+    <form action="" name="form2" id="form2" method="post">
+        <input type="number" name="" id="number-a">
+        <input type="number" name="" id="number-b">
+        <span id="result"></span>
+        <input type="button" value="Plus +" name="plus" onclick="sum();">
+        <input type="button" value="Subs -" name="subs" onclick="sub();">
+    </form>
+    <hr>
+    <form action="" name="form3" id="form3">
+        <img id="image" src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png"
+            style="width: 100px; height: 100px;">
+        <button id="add">Tăng</button>
+        <button id="minus">Giảm</button>
+    </form>
+    <hr>
+    <form action="">
+        <input type="text" id="myInput" placeholder="Nhập nội dung công việc mới" size="50px">
+        <input type="button" onclick="newElement()" class="addBtn" value="Tao cong viec">
+        <br>
+        <h1>Danh sach cong viec can lam</h1>
+        <br>
+        <ul id="myUl">
+            <li>Di choi</li>
+            <li>Lam bai tap</li>
+            <li>Giat quan ao</li>
+        </ul>
+    </form>
+    <hr>
+    <form action="">
+        <h1>Danh sách người dùng</h1>
+        <br>
+        <table border="">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th></th>
+            </tr>
+            <tr id="list">
+                <th>1</th>
+                <th>Name 1</th>
+                <th>Address 1</th>
+                <th><button id="delete">Xoa</button></th>
+            </tr>
+            <tr id="list">
+                <th>2</th>
+                <th>Name 2</th>
+                <th>Address 2</th>
+                <th><button id="delete">Xoa</button></th>
+            </tr>
+            <tr id="list">
+                <th>3</th>
+                <th>Name 3</th>
+                <th>Address 3</th>
+                <th><button id="delete">Xoa</button></th>
+            </tr>
+            <tr id="list">
+                <th>4</th>
+                <th>Name 4</th>
+                <th>Address 4</th>
+                <th><button id="delete">Xoa</button></th>
+            </tr>
+            
+        </table>
+    </form>
+    <script>
+        function checkEmail() {
+            var email = document.getElementById('email');
+            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!filter.test(email.value)) {
+                alert('Hay nhap dia chi email hop le.\nExample@gmail.com');
+                email.focus;
+                return false;
+            } else {
+                alert('Okee')
+            }
+        }
+
+        function sum() {
+            let a = document.getElementById("number-a").value;
+            let b = document.getElementById("number-b").value;
+            if (a == "" || b == "") {
+                alert("Vui lòng nhập vào hai số");
+                return false;
+            }
+            a = Number(a);
+            b = Number(b);
+            let sum = parseInt(a) + b;
+            document.getElementById('result').innerHTML = sum;
+        }
+        function sub() {
+            let a = document.getElementById("number-a").value;
+            let b = document.getElementById("number-b").value;
+            if (a == "" || b == "") {
+                alert("Vui lòng nhập vào hai số");
+                return false;
+            }
+            a = Number(a);
+            b = Number(b);
+            let sub = parseInt(a) - b;
+            document.getElementById('result').innerHTML = sub;
+        }
+
+
+        const img = document.querySelector("#image");
+        const add = document.querySelector("#add");
+        const minus = document.querySelector("#minus");
+        add.addEventListener("click", function () {
+            const img_width = document.querySelector("#image").width;
+            const img_height = document.querySelector("#image").height;
+            img.style.width = img_width + 10 + "px"
+            img.style.height = img_height + 10 + "px"
+        })
+        minus.addEventListener("click", function () {
+            const img_width = document.querySelector("#image").width;
+            const img_height = document.querySelector("#image").height;
+            if (img_width != 0 && img_height != 0) {
+                img.style.width = img_width - 10 + "px";
+                img.style.height = img_height - 10 + "px";
+            }
+        })
+
+        function newElement() {
+            const li = document.createElement("li");
+            const inputValue = document.getElementById("myInput").value;
+            const text = document.createTextNode(inputValue);
+            li.appendChild(text);
+            if (inputValue === '') {
+                alert("You must write something")
+            } else {
+                document.getElementById("myUl").appendChild(li)
+            }
+            document.getElementById("myInput").value = " ";
+        }
+
+        const list = document.querySelector("#list");
+        const deleteBtn = document.querySelector("#delete");
+        deleteBtn.addEventListener("click", function(){
+            list.remove();
+        })
+        // const list = document.querySelector('#list');
+        // list.addEventListener('click', handleClick, false);
+        // function handleClick(e){
+        //     if(e.target.matches('.delete')){
+        //         const {id} = e.target.dataset;
+        //         const selector = `th[data-id = "${id}"]`;
+        //         list.querySelector(selector).remove();
+        //     }
+        // }
+    </script>
+</body>
+
+</html>
